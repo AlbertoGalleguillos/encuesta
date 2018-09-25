@@ -51,6 +51,6 @@ class AnswerController extends Controller
         $chart->dataset('Result', 'bar', $count)->options(['color' => '#ff0000']);
         $chart->options(['color' => '#ff0000']);
 
-        return view('result.index', compact('chart','total'));
+        return view('result.index', compact('chart','total', 'code'));
     }
 }

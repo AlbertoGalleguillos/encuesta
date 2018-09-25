@@ -9,7 +9,7 @@ class Code extends Model
         return Code::where([
             ['valid_until', '>', now()],
             ['user_id', 1]
-        ])->get();
+        ])->withCount('answers')->get();
     }
 
     public function question() {

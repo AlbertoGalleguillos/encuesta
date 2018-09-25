@@ -11,19 +11,26 @@
             <thead>
             <tr>
                 <th>Código</th>
-                <th>Id Pregunta</th>
-                <th>Título Pregunta</th>
-                <th>Acciones</th>
+                <th>Pregunta</th>
+                <th class="center">Imagen</th>
+                <th class="center">Respuestas</th>
+                <th class="center">Válido Hasta</th>
+                <th colspan="2">Acciones</th>
             </tr>
             </thead>
             <tbody>
             @forelse($codes as $code)
                 <tr>
                     <td>{{ $code->number }}</td>
-                    <td>{{ $code->question_id }}</td>
-                    <td>Título</td>
+                    <td>{{ $code->question->title }}</td>
+                    @include('layouts.image', ['image' => $code->question->image_path])
+                    <td class="center">{{ $code->answers_count }}</td>
+                    <td class="center">{{ $code->valid_until }}</td>
                     <td width="10px"><a class="tooltipped" data-position="left" data-tooltip="Deshabilitar Código"
                                         href="/code/{{ $code->id }}/disable"><i class="material-icons">block</i></a>
+                    </td>
+                    <td width="10px"><a class="tooltipped" data-position="left" data-tooltip="Ver Resultados"
+                                        href="/result/{{ $code->id }}"><i class="material-icons">bar_chart</i></a>
                     </td>
                 </tr>
             @empty
@@ -49,14 +56,14 @@
             <tr>
                 <td>{{ $question->id }}</td>
                 <td>{{ $question->title }}</td>
-                <td>{{ $question->image }}</td>
+                @include('layouts.image', ['image' => $question->image_path])
                 <td width="10px">
                     <a class="tooltipped" data-position="left" data-tooltip="Generar nuevo código"
                        href="/generate/{{ $question->id }}"><i class="material-icons">touch_app</i></a>
                 </td>
                 <td width="10px">
                     <a class="tooltipped" data-position="left" data-tooltip="Editar Pregunta"
-                       href="/edit/{{ $question->id }}"><i class="material-icons">edit</i></a></td>
+                       href="/question/{{ $question->id }}/edit"><i class="material-icons">edit</i></a></td>
                 <td width="10px">
                     <a class="tooltipped" data-position="left" data-tooltip="Ver Pregunta"
                        href="/question/{{ $question->id }}"><i class="material-icons">visibility</i></a>

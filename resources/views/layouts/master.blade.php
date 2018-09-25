@@ -16,7 +16,12 @@
 
 <nav class="indigo">
     <div class="container nav-wrapper">
-        <a href="/" class="brand-logo">@yield('title')</a>
+        <a href="/" class="left brand-logo">@yield('title')</a>
+        <ul id="nav-mobile" class="right">
+            @if (Request::path() != 'old-codes')
+                <li><a href="/old-codes">Códigos Antiguos</a></li>
+            @endif
+        </ul>
     </div>
 </nav>
 <main>

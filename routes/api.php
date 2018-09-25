@@ -22,7 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });*/
 
 Route::get('/questions', 'QuestionController@all');
-Route::get('/question/{id}', 'QuestionController@show');
+Route::get('/question/{id}', 'QuestionController@apiShow');
 Route::get('/code/{number}', 'CodeController@show');
 Route::post('/answer', 'AnswerController@create');
 Route::get('/answer/{code}', 'AnswerController@show');

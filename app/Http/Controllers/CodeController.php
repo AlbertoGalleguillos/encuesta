@@ -40,9 +40,19 @@ class CodeController extends Controller
         ])->first();
 
         if ($code != null) {
-            return ['code' => $code,  'question' => Question::with('alternatives')->find($code->question_id)];
+            return ['code' => $code, 'question' => Question::with('alternatives')->find($code->question_id)];
         } else {
             return response()->json(['error' => 'Código no válido'], Response::HTTP_NOT_FOUND);
         }
+    }
+
+    public function old()
+    {
+        $codes = Code::withCount('answers')
+            ->where('user_id', 1)
+            ->orderBy('id', 'desc')->paginate(20);
+            //->get();
+        //$codes = 1;
+        return view('code.old', compact('codes'));
     }
 }

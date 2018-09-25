@@ -5,6 +5,33 @@
 @endsection
 
 @section('content')
+    <table>
+        <tr>
+            <th class="center">Código</th>
+            <th class="center">Pregunta</th>
+        </tr>
+        <tr>
+            <td class="center">{{ $code->number }}</td>
+            <td class="center">{{ $code->question->title }}</td>
+        </tr>
+        <tr>
+            @include('layouts.image', ['image' => $code->question->image_path, 'colspan' => 2])
+        </tr>
+        <tr>
+            <th colspan="2" class="center">Alternativas</th>
+        </tr>
+        <tr>
+            <th class="center">Id</th>
+            <th class="center">Descripción</th>
+        </tr>
+        @foreach($code->question->alternatives as $alternative)
+            <tr>
+                <td class="center">{{ $alternative->id }}</td>
+                <td class="center">{{ $alternative->body     }}</td>
+            </tr>
+        @endforeach
+    </table>
+    <br>
     <div style="height: 400px">
         {!! $chart->container() !!}
     </div>
