@@ -26,3 +26,7 @@ Route::get('/question/{id}', 'QuestionController@apiShow');
 Route::get('/code/{number}', 'CodeController@show');
 Route::post('/answer', 'AnswerController@create');
 Route::get('/answer/{code}', 'AnswerController@show');
+Route::get('/result/{code}', 'AnswerController@votes');
+Route::get('/chart/{code}', 'AnswerController@chart');
+
+Route::post('/webclass', 'WebclassQuestionController@store');

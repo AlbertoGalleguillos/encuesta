@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Code;
 use App\Question;
 use App\QuestionAlternative;
+use App\Test;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,7 +17,8 @@ class QuestionController extends Controller
     {
         $questions = Question::all();
         $codes = Code::getActives();
-        return view('index', compact('questions', 'codes'));
+        $tests = Test::all();
+        return view('index', compact('questions', 'codes', 'tests'));
     }
 
     public function all()
@@ -49,6 +51,8 @@ class QuestionController extends Controller
         //TODO: Change user by authenticated user
         $userId = 1;
 
+        //return $request->get('alternatives');
+
         $question = new Question();
         $question->user_id = $userId;
         $question->title = $request->input('title', 'Sin Título');
@@ -62,6 +66,10 @@ class QuestionController extends Controller
             $request->session()->flash('message', 'Pregunta guardada correctamente.');
         } else {
             $request->session()->flash('message', 'Error, comuníquese con soporte');
+        }
+
+        foreach ($request->get('alternatives') as $alternative) {
+            $question->alternatives()->create(['body' => $alternative]);
         }
 
         return redirect('/');

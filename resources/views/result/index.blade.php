@@ -32,7 +32,7 @@
         @endforeach
     </table>
     <br>
-    <div style="height: 400px">
+    <div id="app" style="height: 400px">
         {!! $chart->container() !!}
     </div>
     <br>
@@ -41,5 +41,49 @@
     </div>
     <br>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
+
+
+
     {!! $chart->script() !!}
+    {!! $chart->id !!}
+
+
+
+    <script>
+        //TODO: initialize vue
+        let id = @json($chart->id)
+//            method, setTimeout(this.function, 1000);
+
+
+export:
+        method:
+        { readColegios()
+            {
+                axios.get('/colegios')
+                    .then(response => {
+                        this.colegios = response.data.colegios.data;
+
+                    });,
+
+            },
+          again() {
+            setTimeout(this.readSchools, 1000);
+            again();
+        }
+        },
+            data(
+                colegios: {},
+            ),
+            computed: {
+            again();
+        }
+
+            ;
+
+    </script>
 @endsection
+
+
+
+
+

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAnswersTable extends Migration
+class CreateWebclassQuestionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateAnswersTable extends Migration
      */
     public function up()
     {
-        Schema::create('answers', function (Blueprint $table) {
+        Schema::create('webclass_questions', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('code_id')->unsigned();
-            $table->integer('alternative_id')->unsigned();
-            $table->integer('user_id')->unsigned();
+            $table->integer('user_id')->nullable();
+            $table->text('data');
+            $table->enum('state',['pending', 'fulfilled', 'rejected'])->default('pending');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateAnswersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('answers');
+        Schema::dropIfExists('webclass_questions');
     }
 }

@@ -22,8 +22,8 @@
             @forelse($codes as $code)
                 <tr>
                     <td>{{ $code->number }}</td>
-                    <td>{{ $code->question->title }}</td>
-                    @include('layouts.image', ['image' => $code->question->image_path])
+                    <td>{{ $code->test->title }}</td>
+                    @include('layouts.image', ['image' => $code->test->image_path])
                     <td class="center">{{ $code->answers_count }}</td>
                     <td class="center">{{ $code->valid_until }}</td>
                     <td width="10px"><a class="tooltipped" data-position="left" data-tooltip="Deshabilitar Código"
@@ -34,7 +34,7 @@
                     </td>
                 </tr>
             @empty
-                <td colspan="4" class="center">No tienes códigos activos</td>
+                <td colspan="6" class="center">No tienes códigos activos</td>
             @endforelse
             </tbody>
         </table>
@@ -58,10 +58,6 @@
                 <td>{{ $question->title }}</td>
                 @include('layouts.image', ['image' => $question->image_path])
                 <td width="10px">
-                    <a class="tooltipped" data-position="left" data-tooltip="Generar nuevo código"
-                       href="/generate/{{ $question->id }}"><i class="material-icons">touch_app</i></a>
-                </td>
-                <td width="10px">
                     <a class="tooltipped" data-position="left" data-tooltip="Editar Pregunta"
                        href="/question/{{ $question->id }}/edit"><i class="material-icons">edit</i></a></td>
                 <td width="10px">
@@ -70,7 +66,43 @@
                 </td>
             </tr>
         @empty
-            <td class="center" colspan="6">Aún no tienes preguntas, crea una con el botón verde (Esquina inferior
+            <td class="center" colspan="5">Aún no tienes preguntas, crea una con el botón verde (Esquina inferior
+                derecha)
+            </td>
+        @endforelse
+        </tbody>
+    </table>
+    <br>
+    <h3>Mis pruebas</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Título</th>
+            <th>Descripción</th>
+            <th colspan="3" class="center">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        @forelse($tests as $test)
+            <tr>
+                <td>{{ $test->id }}</td>
+                <td>{{ $test->title }}</td>
+                <td>{{ $test->body ?? '-' }}</td>
+                <td width="10px">
+                    <a class="tooltipped" data-position="left" data-tooltip="Generar nuevo código"
+                       href="/generate/{{ $test->id }}"><i class="material-icons">touch_app</i></a>
+                </td>
+                <td width="10px">
+                    <a class="tooltipped" data-position="left" data-tooltip="Editar Prueba"
+                       href="/test/{{ $test->id }}/edit"><i class="material-icons">edit</i></a></td>
+                <td width="10px">
+                    <a class="tooltipped" data-position="left" data-tooltip="Ver Prueba"
+                       href="/test/{{ $test->id }}"><i class="material-icons">visibility</i></a>
+                </td>
+            </tr>
+        @empty
+            <td class="center" colspan="5">Aún no tienes preguntas, crea una con el botón verde (Esquina inferior
                 derecha)
             </td>
         @endforelse

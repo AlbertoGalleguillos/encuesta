@@ -4,17 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Code;
 use App\Question;
+use App\Test;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class CodeController extends Controller
 {
-    public function create(Question $question)
+    public function create(Test $test)
     {
         $number = rand(100000, 999999);
+        //TODO: validate not repeat code
         $code = Code::create([
             "user_id" => 1,
-            "question_id" => $question->id,
+            "test_id" => $test->id,
             "number" => $number,
             "valid_until" => now()->addDay(),
         ]);
@@ -34,13 +36,13 @@ class CodeController extends Controller
 
     public function show($number)
     {
-        $code = Code::where([
+        $code = Code::with('test.questions.alternatives')->where([
             ['number', $number],
             ['valid_until', '>', now()]
         ])->first();
 
         if ($code != null) {
-            return ['code' => $code, 'question' => Question::with('alternatives')->find($code->question_id)];
+            return $code;
         } else {
             return response()->json(['error' => 'Código no válido'], Response::HTTP_NOT_FOUND);
         }

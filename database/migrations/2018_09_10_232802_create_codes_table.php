@@ -17,7 +17,7 @@ class CreateCodesTable extends Migration
             $table->increments('id');
             $table->integer('number')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->integer('question_id')->unsigned();
+            $table->integer('test_id')->unsigned();
             $table->dateTime('valid_until');
             $table->timestamps();
         });

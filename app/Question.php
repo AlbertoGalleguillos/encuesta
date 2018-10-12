@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
-    public function alternatives() {
+    public function alternatives()
+    {
         return $this->hasMany('App\QuestionAlternative');
     }
+
 }

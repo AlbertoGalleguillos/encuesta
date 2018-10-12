@@ -16,6 +16,10 @@ class Code extends Model
         return $this->belongsTo('App\Question');
     }
 
+    public function test() {
+        return $this->belongsTo('App\Test');
+    }
+
     public function answers() {
         return $this->hasMany('App\Answer');
     }

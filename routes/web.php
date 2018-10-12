@@ -18,7 +18,7 @@ Route::get('/question/{question}/edit', 'QuestionController@edit');
 Route::put('/question/{question}', 'QuestionController@update');
 Route::post('/question', 'QuestionController@store');
 
-Route::get('/generate/{question}', 'CodeController@create');
+Route::get('/generate/{test}', 'CodeController@create');
 Route::get('/code/{code}/disable', 'CodeController@disable');
 Route::get('/old-codes', 'CodeController@old');
 Route::get('/result/{code}', 'AnswerController@index');
