@@ -17,6 +17,7 @@ class CreateTestsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('body')->nullable();
+            $table->integer('wc_id')->unsigned()->nullable();
             $table->timestamps();
         });
     }

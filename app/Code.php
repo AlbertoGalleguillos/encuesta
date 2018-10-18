@@ -12,15 +12,23 @@ class Code extends Model
         ])->withCount('answers')->get();
     }
 
-    public function question() {
+    public static function actives()
+    {
+        return Code::where('valid_until', '>', now())->get()->toArray();
+    }
+
+    public function question()
+    {
         return $this->belongsTo('App\Question');
     }
 
-    public function test() {
+    public function test()
+    {
         return $this->belongsTo('App\Test');
     }
 
-    public function answers() {
+    public function answers()
+    {
         return $this->hasMany('App\Answer');
     }
 }

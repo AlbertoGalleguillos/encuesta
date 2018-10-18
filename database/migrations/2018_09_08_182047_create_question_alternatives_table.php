@@ -17,6 +17,7 @@ class CreateQuestionAlternativesTable extends Migration
             $table->increments('id');
             $table->integer('question_id')->unsigned();
             $table->string('body');
+            $table->integer('wc_id')->unsigned()->nullable();
             $table->timestamps();
         });
     }
