@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAnswersTable extends Migration
+class CreateFacebookUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateAnswersTable extends Migration
      */
     public function up()
     {
-        Schema::create('answers', function (Blueprint $table) {
+        Schema::create('facebook_users', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('alternative_id')->unsigned();
-            $table->integer('code_id')->unsigned();
-            $table->integer('question_id')->unsigned();
-            $table->bigInteger('user_id')->unsigned();
+            $table->string('first_name');
+            $table->string('last_name')->nullable();
+            $table->string('email');
+            $table->bigInteger('facebook_id');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateAnswersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('answers');
+        Schema::dropIfExists('facebook_users');
     }
 }
