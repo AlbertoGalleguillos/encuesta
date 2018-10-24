@@ -54,6 +54,21 @@ return [
             'engine' => null,
         ],
 
+        'webclass' => [
+            'driver' => 'mysql',
+            'host' => env('WC_DB_HOST', '127.0.0.1'),
+            'port' => env('WC_DB_PORT', '3306'),
+            'database' => env('WC_DB_DATABASE', 'forge'),
+            'username' => env('WC_DB_USERNAME', 'forge'),
+            'password' => env('WC_DB_PASSWORD', ''),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', '127.0.0.1'),

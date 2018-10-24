@@ -21,12 +21,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return 'Hello';
 });*/
 
-Route::get('/questions', 'QuestionController@all');
-Route::get('/question/{id}', 'QuestionController@apiShow');
-Route::get('/code/{number}', 'CodeController@show');
-Route::post('/answer', 'AnswerController@create');
+Route::post('/answers', 'AnswerController@create');
 Route::get('/answer/{code}', 'AnswerController@show');
 Route::get('/result/{code}', 'AnswerController@votes');
 Route::get('/chart/{code}', 'AnswerController@chart');
+Route::get('/code/{number}', 'CodeController@show');
+Route::get('/questions', 'QuestionController@all');
+Route::get('/question/{id}', 'QuestionController@apiShow');
+Route::post('/user/auth', 'UserController@auth');
 
 Route::post('/webclass', 'WebclassQuestionController@store');

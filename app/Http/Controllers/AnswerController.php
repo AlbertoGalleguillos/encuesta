@@ -12,28 +12,29 @@ class AnswerController extends Controller
 {
     public function create(Request $request)
     {
-        if ($request->has(['code', 'alternative'])) {
-            $answer = Answer::create([
-                'code_id' => $request->code,
-                'alternative_id' => $request->alternative
-            ]);
+        if ($request->has('answers', 'code', 'user')) {
+            foreach ($request->input('answers') as $answer) {
+                $aux = Answer::create([
+                    'alternative_id' => $answer['alternative'],
+                    'code_id' => $request->input('code'),
+                    'question_id' => $answer['question'],
+                    'user_id' => $request->input('user'),
+                ]);
+            }
+            return $aux ?? response()->json(['error' => 'Error, comuníquese con soporte'], Response::HTTP_BAD_REQUEST);
         } else {
-            return response()->json(['error' => 'Falta ingresar código o alternativa'], Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
-        if ($answer) {
-            return response()->json(['message' => 'Respuesta ingresada con éxito'], Response::HTTP_OK);
-        } else {
-            return response()->json(['error' => 'Error, comuníquese con soporte'], Response::HTTP_BAD_REQUEST);
+            return response()->json(['error' => 'Falta ingresar usuario, código o alternativa'], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
     }
 
     public function show(Code $code)
     {
-        $total = [];
-        foreach ($code->question->alternatives as $alternative) {
-            $total[] = ['alternative_id' => $alternative->id, 'total' => $code->answers->where('alternative_id', $alternative->id)->count()];
+        foreach ($code->test->questions as $question) {
+            foreach ($question->alternatives as $alternative) {
+                $alternative['count'] = $code->answers->where('alternative_id', $alternative->id)->count();
+            }
         }
-        return $total;
+        return $code;
     }
 
     public function index(Code $code)
@@ -85,8 +86,6 @@ class AnswerController extends Controller
         $chart = new ResultChart();
         $chart->labels($label);
         $chart->dataset('Result', 'bar', $count);
-
-        //dd($chart);
 
         return $chart->script();
     }
