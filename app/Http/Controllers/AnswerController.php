@@ -12,13 +12,14 @@ class AnswerController extends Controller
 {
     public function create(Request $request)
     {
-        if ($request->has('answers', 'code', 'user')) {
+        if ($request->has('answers', 'code', 'user_id', 'user_type')) {
             foreach ($request->input('answers') as $answer) {
                 $aux = Answer::create([
                     'alternative_id' => $answer['alternative'],
                     'code_id' => $request->input('code'),
                     'question_id' => $answer['question'],
-                    'user_id' => $request->input('user'),
+                    'user_id' => $request->input('user_id'),
+                    'user_type' => $request->input('user_type'),
                 ]);
             }
             return $aux ?? response()->json(['error' => 'Error, comuníquese con soporte'], Response::HTTP_BAD_REQUEST);
