@@ -9,10 +9,7 @@ class FacebookUserController extends Controller
 {
     public function create(Request $request)
     {
-
-
         $user = FacebookUser::where('facebook_id', $request->input('id'))->first();
-        //dd($user);
         if (!$user) {
             $user = FacebookUser::create([
                 'first_name' => $request->input('first_name'),

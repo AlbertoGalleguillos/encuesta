@@ -28,6 +28,6 @@ class CreateQuestionTestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('question_tests');
+        Schema::dropIfExists('question_test');
     }
 }

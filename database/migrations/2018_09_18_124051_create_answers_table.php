@@ -19,6 +19,7 @@ class CreateAnswersTable extends Migration
             $table->integer('code_id')->unsigned();
             $table->integer('question_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
+            $table->enum('user_type', ['Faceboook', 'Google', 'Webclass'])->default('Webclass');
             $table->timestamps();
         });
     }

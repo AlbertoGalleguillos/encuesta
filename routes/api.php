@@ -30,5 +30,6 @@ Route::get('/questions', 'QuestionController@all');
 Route::get('/question/{id}', 'QuestionController@apiShow');
 Route::post('/user/auth', 'UserController@auth');
 Route::post('/facebook', 'FacebookUserController@create');
+Route::post('/google', 'GoogleUserController@create');
 
 Route::post('/webclass', 'WebclassQuestionController@store');
