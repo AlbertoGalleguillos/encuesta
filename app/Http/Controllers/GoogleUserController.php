@@ -9,16 +9,16 @@ class GoogleUserController extends Controller
 {
     public function create(Request $request)
     {
-        return $request->all();
         $user = GoogleUser::where('google_id', $request->input('id'))->first();
         if (!$user) {
             $user = GoogleUser::create([
-                'display_name' => $request->input('first_name'),
+                'display_name' => $request->input('display_name'),
                 'email' => $request->input('email'),
                 'google_id' => $request->input('id'),
-                'photo_url' => $request->input('last_name')
+                'photo_url' => $request->input('photo_url')
             ]);
         }
+        $user['type'] = 'Google';
         return $user;
     }
 }
