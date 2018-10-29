@@ -18,6 +18,7 @@ class FacebookUserController extends Controller
                 'facebook_id' => $request->input('id')
             ]);
         }
+        $user['type'] = 'Facebook';
         return $user;
     }
 }
